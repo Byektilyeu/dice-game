@@ -29,7 +29,7 @@ var diceDom = document.querySelector('.dice');
 diceDom.style.display = "none";
 
 // Shoog shiideh event listener
-document.querySelector(".btn-roll").addEventListener("click", function (){
+document.querySelector(".btn-roll").addEventListener('click', function (){
     // 1-ees 6 dotorh sanamsargui 1 too ggargaj avna
     var diceNumber = Math.floor(Math.random() * 6) + 1;
 
@@ -47,33 +47,54 @@ document.querySelector(".btn-roll").addEventListener("click", function (){
     } else {
         // 1 buusan tul toglogchiin eeljiig ene hesegt solij ugnu. 
 
-        // Ene toglogchiin eeljiindeee tsugluulsan onoog 0 bolgono
-        roundScore = 0;
-        document.getElementById('current-' + activePlayer).textContent = 0;
-        //toglogchiin eeljiig shiljuulne
-        if(activePlayer === 0){
-            activePlayer = 1;
-        } else {
-            activePlayer = 0;
-        }
-        //Ulaan tsegiig haij oloh hesgiig hiine
-        document.querySelector('.player-0-panel').classList.toggle("active");
-        document.querySelector('.player-1-panel').classList.toggle("active");
-
-
-        // Shoog tur alga bolgoh
-        diceDom.style.display = "none";
-
-
-
-        // Herev idevhtei toglogch ni 0 baival idevhtei toglogchiig 1 bolgo
-        // Ugui bol idevhtei toglogchiig 0 bolgo
-
-
-
-
+        switchToNextPlayer();
     }
 });
+
+        // HOLD tovchnii event listener
+        document.querySelector('.btn-hold').addEventListener('click', function(){
+            // Ug toglogchiin tsugluulsan eeljiin onoog global onoo deer ni nemj ugnu
+            
+            // if(activePlayer === 0){
+            //     scores[0] = scores[0] + roundScore;
+            // } else {
+            //     scores[1] = scores[1] + roundScore;
+            // }
+            // doorh code deerh code-toi yalgaagui bna
+            scores[activePlayer] = scores[activePlayer] + roundScore;
+            
+            
+            // Delgets deer onoog ni uurchilnu
+            document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
+
+            // Ug toglogch hojson esehiig shalgah (100 ih bol hojno)
+            if(scores[activePlayer] >= 10){
+                // Yalagch gesen textiig winner gej gargana
+                document.getElementById('name-' + activePlayer).textContent = "WINNER!!"
+                document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+                document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+            } else {
+                switchToNextPlayer();
+            }
+        });
+
+        // ene funkts ni toglochiin eeljiig solidog
+        function switchToNextPlayer(){
+            // Ene toglogchiin eeljiindeee tsugluulsan onoog 0 bolgono
+            roundScore = 0;
+            document.getElementById('current-' + activePlayer).textContent = 0;
+            //toglogchiin eeljiig shiljuulne
+            if(activePlayer === 0){
+                activePlayer = 1;
+            } else {
+                activePlayer = 0;
+            }
+            //Ulaan tsegiig haij oloh hesgiig hiine
+            document.querySelector('.player-0-panel').classList.toggle("active");
+            document.querySelector('.player-1-panel').classList.toggle("active");
+            // Shoog tur alga bolgoh
+            diceDom.style.display = "none";
+        }
 
 
 
