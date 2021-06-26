@@ -1,32 +1,63 @@
-// Toglogchiin  eeljiig hadgalah huvsagch, 1-r toglogchiig 0, 2-r toglochiig 1 gej temdeglii
-var activePlayer = 0;
 
-// oglogchdiin tsugluulsan onoog hadgalah huvisagch
-var scores = [0, 0];
-
-// Toglogchiin eeljiindee tsugluulj baigaa onoog hadgalah huvisagch
-var roundScore = 0;
-
-// Shoonii ali talaaraa buusniig hadgalah huvisagch heregtei, 1-6 gesen 
-// utgiig ene huvisagchid sanamsarguigeer uusgej ugnu. 
-var diceNumber = Math.floor(Math.random() * 6) + 1;
-
-//<div class="player-score" id="score-0">43</div>
-//id-aar (#) ni haij olood utgiig ni uurchilj bna
-//window. - iig bichihgui baij bolno
-// window.document.querySelector('#score-0').innerHTML = dice;
-
-// document.querySelector('#score-1').innerHTML = dice;
-
-// Program ehlehed beltgii
-document.getElementById("score-0").textContent = '0';
-document.getElementById('score-1').textContent = '0';
-document.getElementById('current-0').textContent = '0';
-document.getElementById('current-1').textContent = '0';
+var activePlayer;
+var scores;
+var roundScore;
 
 // class-aar haih tohioldold .-eer haina
+//Shoonii zurgiig uzuuleh elementiig DOM-oos haij olood end hadgalya
 var diceDom = document.querySelector('.dice');
-diceDom.style.display = "none";
+
+// Togloomiig ehelne
+initGame();
+
+
+// NEW game beltgeh
+function initGame(){
+    // Toglogchiin  eeljiig hadgalah huvsagch, 1-r toglogchiig 0, 2-r toglochiig 1 gej temdeglii
+    activePlayer = 0;
+
+    // oglogchdiin tsugluulsan onoog hadgalah huvisagch
+    scores = [0, 0];
+
+    // Toglogchiin eeljiindee tsugluulj baigaa onoog hadgalah huvisagch
+    roundScore = 0;
+
+    // Shoonii ali talaaraa buusniig hadgalah huvisagch heregtei, 1-6 gesen 
+    // utgiig ene huvisagchid sanamsarguigeer uusgej ugnu. 
+    var diceNumber = Math.floor(Math.random() * 6) + 1;
+
+    //<div class="player-score" id="score-0">43</div>
+    //id-aar (#) ni haij olood utgiig ni uurchilj bna
+    //window. - iig bichihgui baij bolno
+    // window.document.querySelector('#score-0').innerHTML = dice;
+
+    // document.querySelector('#score-1').innerHTML = dice;
+
+    // Program ehlehed beltgii
+    document.getElementById("score-0").textContent = '0';
+    document.getElementById('score-1').textContent = '0';
+    document.getElementById('current-0').textContent = '0';
+    document.getElementById('current-1').textContent = '0';
+
+
+    // toglogchuudiin neriig butsaaj gargah
+    document.getElementById('name-0').textContent = 'Player 1';
+    document.getElementById('name-0').textContent = 'Player 2';
+
+    //
+    document.querySelector('.player-0-panel').classList.remove('winner');
+    document.querySelector('.player-1-panel').classList.remove('winner');
+
+
+    document.querySelector('.player-0-panel').classList.remove("active");
+    document.querySelector('.player-1-panel').classList.remove("active")
+
+
+    document.querySelector('.player-0-panel').classList.add("active")
+
+    diceDom.style.display = "none";
+}
+
 
 // Shoog shiideh event listener
 document.querySelector(".btn-roll").addEventListener('click', function (){
@@ -95,6 +126,10 @@ document.querySelector(".btn-roll").addEventListener('click', function (){
             // Shoog tur alga bolgoh
             diceDom.style.display = "none";
         }
+
+
+        // NEW GAme buyu Shine togloom ehluuleh event listener
+        document.querySelector('.btn-new').addEventListener('click', initGame);
 
 
 
